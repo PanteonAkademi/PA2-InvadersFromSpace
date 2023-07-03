@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 105402239}
   - component: {fileID: 105402238}
   m_Layer: 0
-  m_Name: Alien_01_00
+  m_Name: Alien_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -576,7 +576,7 @@ GameObject:
   - component: {fileID: 774739319}
   - component: {fileID: 774739318}
   m_Layer: 0
-  m_Name: Alien_02_00
+  m_Name: Alien_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -714,7 +714,7 @@ GameObject:
   - component: {fileID: 869001105}
   - component: {fileID: 869001104}
   m_Layer: 0
-  m_Name: Explosion_0
+  m_Name: Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -819,7 +819,7 @@ GameObject:
   - component: {fileID: 1069552472}
   - component: {fileID: 1069552471}
   m_Layer: 0
-  m_Name: EnemyBullet_0
+  m_Name: EnemyBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1092,7 +1092,7 @@ GameObject:
   - component: {fileID: 1602670937}
   - component: {fileID: 1602670936}
   m_Layer: 0
-  m_Name: Alien_03_00
+  m_Name: Alien_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1197,7 +1197,7 @@ GameObject:
   - component: {fileID: 1765444643}
   - component: {fileID: 1765444642}
   m_Layer: 0
-  m_Name: Alien_05_00
+  m_Name: Alien_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1302,7 +1302,7 @@ GameObject:
   - component: {fileID: 1986316382}
   - component: {fileID: 1986316381}
   m_Layer: 0
-  m_Name: Alien_04_00
+  m_Name: Alien_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
