@@ -5,8 +5,8 @@ using UnityEngine;
 public class AlienMaster : MonoBehaviour
 {
     public GameObject bulletPrefab;
-    private Vector3 hMoveDistance = new Vector3(0, 0, 0);
-    private Vector3 vMoveDistance = new Vector3(0, 0, 0);
+    private Vector3 hMoveDistance = new Vector3(0.05f, 0, 0);
+    private Vector3 vMoveDistance = new Vector3(0, 0.15f, 0);
     private const float MAX_LEFT = -2;
     private const float MAX_RIGHT = 2;
     private const float MAX_MOVE_SPEED = 0.02f;
