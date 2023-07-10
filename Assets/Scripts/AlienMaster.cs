@@ -4,19 +4,25 @@ using UnityEngine;
 
 public class AlienMaster : MonoBehaviour
 {
+    [SerializeField] private ObjectPool objectPool = null;
     public GameObject bulletPrefab;
+    [SerializeField] Player _playerSC;
+    private float width;
     private Vector3 hMoveDistance = new Vector3(0.05f, 0, 0);
     private Vector3 vMoveDistance = new Vector3(0, 0.15f, 0);
-    private const float MAX_LEFT = -2;
-    private const float MAX_RIGHT = 2;
+    //private const float MAX_LEFT = -2;
+    //private const float MAX_RIGHT = 2;
     private const float MAX_MOVE_SPEED = 0.02f;
     public static List<GameObject> allAliens = new List<GameObject>();
     private bool moveingRight;
     private float moveTimer = 0.01f;
     private float moveTime = 0.005f;
+    private float shootTimer = 3f;
+    private const float ShootTime = 3f;
     
     void Start()
     {
+        width = _playerSC.width - 0.15f;
         foreach(GameObject go in GameObject.FindGameObjectsWithTag("Alien"))
         {
             allAliens.Add(go);
@@ -29,7 +35,12 @@ public class AlienMaster : MonoBehaviour
         {
             MoveEnemies();
         }
+        if (shootTimer <= 0)
+        {
+            Shoot();
+        }
         moveTimer -= Time.deltaTime;
+        shootTimer-= Time.deltaTime;
     }
 
     private void MoveEnemies()
@@ -45,7 +56,7 @@ public class AlienMaster : MonoBehaviour
             {
                 allAliens[i].transform.position -= hMoveDistance;
             }
-            if (allAliens[i].transform.position.x > MAX_RIGHT || allAliens[i].transform.position.x < MAX_LEFT)
+            if (allAliens[i].transform.position.x > width || allAliens[i].transform.position.x < -width)
             {
                 hitMax++;
             }
@@ -59,6 +70,16 @@ public class AlienMaster : MonoBehaviour
             moveingRight = !moveingRight;
         }
         moveTimer = GetMovedSpeed();
+    }
+
+    private void Shoot()
+    {
+        Vector2 pos = allAliens[Random.Range(0, allAliens.Count)].transform.position;
+
+        GameObject obj = objectPool.GetPooledObject();
+        obj.transform.position = pos;
+
+        shootTimer = ShootTime;
     }
 
     private float GetMovedSpeed()
