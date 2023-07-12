@@ -8,11 +8,15 @@ public class Player : MonoBehaviour
 
     Camera cam;
     public float width;
-    private float speed = 3f;
+    //private float speed = 3f;
 
     bool isShooting;
-    float coolDown = 0.5f;
+    //float coolDown = 0.5f;
     [SerializeField] private ObjectPool objectPool = null;
+
+    public ShipStats shipStats;
+    private Vector2 offScreenPos = new Vector2(0, -20);
+    private Vector2 startPos = new Vector2(0, -6);
 
     private void Awake()
     {
@@ -22,7 +26,9 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        
+        shipStats.currentHealth = shipStats.maxHealth;
+        shipStats.currentLifes = shipStats.maxLifes;
+        transform.position = startPos;
     }
 
     
@@ -31,11 +37,11 @@ public class Player : MonoBehaviour
 #if UNITY_EDITOR
         if (Input.GetKey(KeyCode.A) && transform.position.x > -width)
         {
-            transform.Translate(Vector2.left * Time.deltaTime * speed);
+            transform.Translate(Vector2.left * Time.deltaTime * shipStats.shipSpeed);
         }
         if (Input.GetKey(KeyCode.D) && transform.position.x < width)
         {
-            transform.Translate(Vector2.right * Time.deltaTime * speed);
+            transform.Translate(Vector2.right * Time.deltaTime * shipStats.shipSpeed);
         }
         if (Input.GetKey(KeyCode.Space) && !isShooting)
         {
@@ -43,7 +49,6 @@ public class Player : MonoBehaviour
         }
 #endif
     }
-
     private IEnumerator Shoot()
     {
         isShooting = true;
@@ -51,9 +56,51 @@ public class Player : MonoBehaviour
         //Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         GameObject obj = objectPool.GetPooledObject();
         obj.transform.position = gameObject.transform.position;
-        yield return new WaitForSeconds(coolDown);
+        yield return new WaitForSeconds(shipStats.fireRate);
 
         isShooting= false;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("EnemyBullet"))
+        {
+            Debug.Log("Player Hit!");
+            collision.gameObject.SetActive(false);
+            TakeDamage();
+        }
+    }
+
+    private IEnumerator Respawn()
+    {
+        transform.position = offScreenPos;
+
+        yield return new WaitForSeconds(2);
+
+        shipStats.currentHealth = shipStats.maxHealth;
+
+        transform.position = startPos;
+    }
+
+
+    public void TakeDamage()
+    {
+        shipStats.currentHealth--;
+
+        if (shipStats.currentHealth <= 0)
+        {
+            shipStats.currentLifes--;
+
+            if (shipStats.currentLifes <= 0)
+            {
+                Debug.Log("Game Over");
+            }
+            else
+            {
+                //Debug.Log("Respawn");
+                StartCoroutine(Respawn());
+            }
+        }
     }
 
 }
