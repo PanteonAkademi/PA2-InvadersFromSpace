@@ -20,5 +20,15 @@ public class MotherShip : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("FriendlyBullet"))
+        {
+            UIManager.UpdateScore(scoreValue);
+            collision.gameObject.SetActive(false);
+            gameObject.SetActive(false);
+        }
+    }
+
 
 }
