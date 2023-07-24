@@ -81,9 +81,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectPool: {fileID: 237548602135983480}
-  motherShipObjectPool: {fileID: 0}
+  motherShipObjectPool: {fileID: 2511627333828909597, guid: 4bd425dcfc13f1e41abf04d418f041b2, type: 3}
   bulletPrefab: {fileID: 3466266637383300384, guid: b71d028f5fb41394d8b6136bd82f512c, type: 3}
-  _playerSC: {fileID: 0}
   motherShipPrefab: {fileID: 7580680927322777928, guid: 7ea96dc4f62470b4885776231f498ef9, type: 3}
 --- !u!114 &237548602135983480
 MonoBehaviour:
